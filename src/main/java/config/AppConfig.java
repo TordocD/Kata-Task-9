@@ -20,10 +20,10 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath: db.properties")
 @EnableTransactionManagement
-@ComponentScan
+@ComponentScan(value = {"model", "service", "dao"})
 public class AppConfig {
 
-    Environment environment;
+    private final Environment environment;
 
     @Autowired
     public AppConfig(Environment environment) {
