@@ -11,11 +11,8 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
 
-    private final EntityManager entityManager;
-
-    public UserDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void createTable() {

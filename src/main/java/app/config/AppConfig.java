@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:db.properties")
+@PropertySource({"classpath:db.properties", "classpath:hibernate.properties"})
 @EnableTransactionManagement
 @ComponentScan(value = {"app"})
 public class AppConfig {
@@ -67,6 +67,7 @@ public class AppConfig {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
+        properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
