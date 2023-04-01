@@ -1,22 +1,18 @@
-package dao;
+package app.dao;
 
-import model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import app.model.User;
 import org.springframework.stereotype.Repository;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext (type = PersistenceContextType.EXTENDED)
-    private EntityManager entityManager;
 
-    @Autowired
+    private final EntityManager entityManager;
+
     public UserDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
