@@ -14,13 +14,13 @@ public class User {
 
     private String name;
     private String surname;
-    private int age;
+    private Integer age;
 
     public User() {
 
     }
 
-    public User(String name, String surname, int age) {
+    public User(String name, String surname, Integer age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -30,15 +30,11 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setUserName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -50,11 +46,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

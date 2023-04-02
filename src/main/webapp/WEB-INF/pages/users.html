@@ -1,10 +1,50 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Users</title>
 </head>
 <body>
+    <h1>Users table</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="user: ${users}">
+            <td th:text="*{user.id}"> </td>
+            <td th:text="*{user.name}"> </td>
+            <td th:text="*{user.surname}"> </td>
+            <td th:text="*{user.age}"> </td>
+        </tr>
+    </table>
 
+    <h2>Add user</h2>
+    <form action="/users/add" method="POST">
+        Name: <input type="text" required name="name"><br />
+        Surname <input type="text" required name="surname"><br />
+        Age <input type="number" required name="age"><br />
+        <button type="submit">Add user</button>
+    </form>
+
+    <h2>Set user`s data</h2>
+    <h4>You may change information about user with specified id</h4>
+    <h5>You may change any number of fields</h5>
+    <form action="/users/setUser" method="POST">
+        User`s id: <input type="number" name="id"><br />
+        New name: <input type="text" name="newName"><br />
+        New surname <input type="text" name="newSurname"><br />
+        New age <input type="number" name="newAge"><br />
+        <button type="submit">Set user`s data</button>
+    </form>
+
+    <h2>Delete user by id</h2>
+    <form action="/users/delete" method="POST">
+        User`s id: <input type="number" name="idOfDeleted"><br />
+        <button type="submit">Delete user</button>
+    </form>
 </body>
 </html>

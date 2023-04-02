@@ -10,9 +10,11 @@ public interface UserDao {
     void createTable();
     void dropTable();
     List<User> getAllUsers();
+    void add(User user);
+    User getById(int id);
     void delete(User user);
     void setName(User user, String newName);
     void setSurname(User user, String newSurname);
-    void setAge(User user, int newAge);
+    void setAge(User user, Integer newAge);
     void setUser(User currentUser, User newUser);
 }

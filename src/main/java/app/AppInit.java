@@ -18,7 +18,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/users", "/users/setUser", "/users/add", "/users/delete"};
     }
 
 }

@@ -17,9 +17,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void createTable() {
         entityManager.createNativeQuery("CREATE TABLE IF NOT EXISTS user(" +
-                "id INT PRIMARY KEY AUTO_INCREMENT," +
-                "name VARCHAR(25)," +
-                "surname VARCHAR(25)," +
+                "id INT PRIMARY KEY AUTO_INCREMENT, " +
+                "name VARCHAR(25), " +
+                "surname VARCHAR(25), " +
                 "age INT);");
     }
 
@@ -32,17 +32,26 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
+    }
 
+    @Override
+    public User getById(int id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void add(User user) {
+        entityManager.persist(user);
     }
 
     @Override
     public void delete(User user) {
-        entityManager.remove(user);
+        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
     }
 
     @Override
     public void setName(User user, String newName) {
-        user.setUserName(newName);
+        user.setName(newName);
         entityManager.merge(user);
     }
 
@@ -53,16 +62,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void setAge(User user, int newAge) {
+    public void setAge(User user, Integer newAge) {
         user.setAge(newAge);
         entityManager.merge(user);
     }
 
     @Override
     public void setUser(User currentUser, User newUser) {
-        currentUser.setUserName(newUser.getName());
-        currentUser.setSurname(newUser.getSurname());
-        currentUser.setAge(newUser.getAge());
+        if(!newUser.getName().equals("")) {
+            currentUser.setName(newUser.getName());
+        }
+        if (!newUser.getSurname().equals("")) {
+            currentUser.setSurname(newUser.getSurname());
+        }
+        if (newUser.getAge() != null) {
+            currentUser.setAge(newUser.getAge());
+        }
         entityManager.merge(currentUser);
     }
 }
