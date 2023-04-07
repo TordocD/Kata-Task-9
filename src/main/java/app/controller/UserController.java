@@ -45,7 +45,17 @@ public class UserController {
 
     @PostMapping(value = "/users/setUser")
     public String setUser(@ModelAttribute User newUser) {
-        userService.setUser(newUser);
+        User currentUser = userService.getById(newUser.getId());
+        if (!newUser.getName().equals("")) {
+            currentUser.setName(newUser.getName());
+        }
+        if (!newUser.getSurname().equals("")) {
+            currentUser.setSurname(newUser.getSurname());
+        }
+        if (newUser.getAge() != null) {
+            currentUser.setAge(newUser.getAge());
+        }
+        userService.setUser(currentUser);
 
         return "redirect:/users";
     }

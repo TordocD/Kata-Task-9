@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Surname</th>
             <th>Age</th>
+
         </tr>
         <tr th:each="user: ${users}">
             <td th:text="*{user.id}"> </td>
@@ -26,7 +27,7 @@
                     </select>
                     <button type="submit">Delete user</button>
                 </form>
-            <td>
+            </td>
         </tr>
     </table>
 
@@ -42,16 +43,16 @@
         </form>
 
 
-    <h2>Set user`s data</h2>
-    
+    <h2>Edit user`s data</h2>
+
     <form th:action="@{/users/setUser}" th:object="${newUser}" method="POST">
         Current user`s id: <select th:field="*{id}">
             <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.id}"></option>
         </select> <br />
-        Name: <input type="text" required th:field="*{name}"><br />
-        Surname <input type="text" required th:field="*{surname}"><br />
-        Age <input type="number" required th:field="*{age}"><br />
-        <button type="submit">Set user</button>
+        Name: <input type="text" th:field="*{name}"><br />
+        Surname <input type="text" th:field="*{surname}"><br />
+        Age <input type="number" th:field="*{age}"><br />
+        <button type="submit">Edit user</button>
     </form>
 
 </body>
