@@ -19,6 +19,14 @@
             <td th:text="*{user.name}"> </td>
             <td th:text="*{user.surname}"> </td>
             <td th:text="*{user.age}"> </td>
+            <td>
+                <form th:action="@{/users/delete}" th:object="${deletedUser}" method="POST">
+                    <select hidden="hidden" th:field="*{id}">
+                         <option th:value="${user.id}"></option>
+                    </select>
+                    <button type="submit">Delete user</button>
+                </form>
+            <td>
         </tr>
     </table>
 
@@ -43,13 +51,6 @@
         Surname <input type="text" required th:field="*{surname}"><br />
         Age <input type="number" required th:field="*{age}"><br />
         <button type="submit">Set user</button>
-    </form>
-
-    <h2>Delete user by id</h2>
-
-    <form th:action="@{/users/delete}" th:object="${deletedUser}" method="POST">
-        Id of user: <input type="number" required th:field="*{id}">
-        <button type="submit">Delete user</button>
     </form>
 
 </body>
