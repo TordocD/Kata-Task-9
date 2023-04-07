@@ -54,15 +54,5 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void setUser(User newUser) {
         entityManager.merge(newUser);
-//        Query query = entityManager.createQuery("UPDATE User SET " +
-//                "name= :name, " +
-//                "surname= :surname," +
-//                "age= :age " +
-//                "WHERE id= :id");
-//        query.setParameter("id", newUser.getId());
-//        query.setParameter("name", newUser.getName());
-//        query.setParameter("surname", newUser.getSurname());
-//        query.setParameter("age", newUser.getAge());
-//        query.executeUpdate();
     }
 }

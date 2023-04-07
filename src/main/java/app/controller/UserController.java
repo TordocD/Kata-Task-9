@@ -10,9 +10,6 @@ import app.service.UserService;
 @Controller
 public class UserController {
 
-    private final ModelMap modelMap = new ModelMap();
-
-
     private final UserService userService;
 
     @Autowired
@@ -59,5 +56,4 @@ public class UserController {
 
         return "redirect:/users";
     }
-
 }
