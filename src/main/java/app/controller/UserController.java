@@ -10,6 +10,9 @@ import app.service.UserService;
 @Controller
 public class UserController {
 
+    private final ModelMap modelMap = new ModelMap();
+
+
     private final UserService userService;
 
     @Autowired
@@ -20,38 +23,29 @@ public class UserController {
     @GetMapping(value = "/users")
     public String getAllUsers(ModelMap model) {
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("deletedUser", new User());
+
         return "users";
     }
 
     @PostMapping(value = "/users/add")
-    public String addUser(ModelMap model,
-                          @RequestParam(name = "name") String name,
-                          @RequestParam(name = "surname") String surname,
-                          @RequestParam(name = "age") int age) {
-        User user = new User(name, surname, age);
-        userService.add(user);
-
+    public String addUser(@ModelAttribute User newUser) {
+        userService.add(newUser);
         return "redirect:/users";
+
     }
 
     @PostMapping(value = "/users/delete")
-    public String deleteUser(ModelMap model,
-                             @RequestParam(name = "idOfDeleted") int id) {
-        User user = userService.getById(id);
-        userService.delete(user);
+    public String deleteUser(@ModelAttribute User deletedUser) {
+        userService.deleteById(deletedUser.getId());
 
         return "redirect:/users";
     }
 
     @PostMapping(value = "/users/setUser")
-    public String setUser(ModelMap model,
-                          @RequestParam(name = "id") int id,
-                          @RequestParam(name = "newName", required = false) String name,
-                          @RequestParam(name = "newSurname", required = false) String surname,
-                          @RequestParam(name = "newAge", required = false) Integer age) {
-        User currentUser = userService.getById(id);
-        User newUser = new User(name, surname, age);
-        userService.setUser(currentUser, newUser);
+    public String setUser(@ModelAttribute User newUser) {
+        userService.setUser(newUser);
 
         return "redirect:/users";
     }

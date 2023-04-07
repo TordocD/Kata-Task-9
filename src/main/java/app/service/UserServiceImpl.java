@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void delete(User user) {
-        userDao.delete(user);
+    public void deleteById(Integer id) {
+        userDao.deleteById(id);
     }
 
     @Override
@@ -53,31 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void setName(User user, String newName) {
-        if (newName != null) {
-            userDao.setName(user, newName);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void setSurname(User user, String newSurname) {
-        if (newSurname != null) {
-            userDao.setSurname(user, newSurname);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void setAge(User user, Integer newAge) {
-        if (newAge != null) {
-            userDao.setAge(user, newAge);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void setUser(User currentUser, User newUser) {
-        userDao.setUser(currentUser, newUser);
+    public void setUser(User newUser) {
+        userDao.setUser(newUser);
     }
 }

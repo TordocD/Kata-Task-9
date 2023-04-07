@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void dropTable() {
         entityManager.createNativeQuery("DROP TABLE IF EXISTS user");
-
     }
 
     @Override
@@ -45,39 +45,23 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(User user) {
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+    public void deleteById(Integer id) {
+        Query query = entityManager.createQuery("DELETE User WHERE id= :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
     @Override
-    public void setName(User user, String newName) {
-        user.setName(newName);
-        entityManager.merge(user);
-    }
-
-    @Override
-    public void setSurname(User user, String newSurname) {
-        user.setSurname(newSurname);
-        entityManager.merge(user);
-    }
-
-    @Override
-    public void setAge(User user, Integer newAge) {
-        user.setAge(newAge);
-        entityManager.merge(user);
-    }
-
-    @Override
-    public void setUser(User currentUser, User newUser) {
-        if(!newUser.getName().equals("")) {
-            currentUser.setName(newUser.getName());
-        }
-        if (!newUser.getSurname().equals("")) {
-            currentUser.setSurname(newUser.getSurname());
-        }
-        if (newUser.getAge() != null) {
-            currentUser.setAge(newUser.getAge());
-        }
-        entityManager.merge(currentUser);
+    public void setUser(User newUser) {
+        Query query = entityManager.createQuery("UPDATE User SET " +
+                "name= :name, " +
+                "surname= :surname," +
+                "age= :age " +
+                "WHERE id= :id");
+        query.setParameter("id", newUser.getId());
+        query.setParameter("name", newUser.getName());
+        query.setParameter("surname", newUser.getSurname());
+        query.setParameter("age", newUser.getAge());
+        query.executeUpdate();
     }
 }

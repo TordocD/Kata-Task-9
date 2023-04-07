@@ -11,9 +11,6 @@ public interface UserService {
     List<User> getAllUsers();
     void add(User user);
     User getById(int id);
-    void delete(User user);
-    void setName(User user, String newName);
-    void setSurname(User user, String newSurname);
-    void setAge(User user, Integer newAge);
-    void setUser(User currentUser, User newUser);
+    void deleteById(Integer id);
+    void setUser(User newUser);
 }
