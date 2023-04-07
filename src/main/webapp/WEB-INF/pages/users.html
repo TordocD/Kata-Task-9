@@ -43,10 +43,11 @@
 
 
     <h2>Set user`s data</h2>
-    <h4>You may change information about user with specified id</h4>
-    <h5>You may change any number of fields</h5>
+    
     <form th:action="@{/users/setUser}" th:object="${newUser}" method="POST">
-        Current user`s id: <input type="number" required th:field="*{id}"><br />
+        Current user`s id: <select th:field="*{id}">
+            <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.id}"></option>
+        </select> <br />
         Name: <input type="text" required th:field="*{name}"><br />
         Surname <input type="text" required th:field="*{surname}"><br />
         Age <input type="number" required th:field="*{age}"><br />
