@@ -22,7 +22,6 @@ public class UserController {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("user", new User());
 
-
         return "users";
     }
 
