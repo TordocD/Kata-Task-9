@@ -20,37 +20,37 @@ public class UserController {
     @GetMapping(value = "/users")
     public String getAllUsers(ModelMap model) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("newUser", new User());
-        model.addAttribute("deletedUser", new User());
+        model.addAttribute("user", new User());
+
 
         return "users";
     }
 
     @PostMapping(value = "/users/add")
-    public String addUser(@ModelAttribute User newUser) {
-        userService.add(newUser);
+    public String addUser(@ModelAttribute User user) {
+        userService.add(user);
         return "redirect:/users";
 
     }
 
     @PostMapping(value = "/users/delete")
-    public String deleteUser(@ModelAttribute User deletedUser) {
-        userService.deleteById(deletedUser.getId());
+    public String deleteUser(@ModelAttribute User user) {
+        userService.deleteById(user.getId());
 
         return "redirect:/users";
     }
 
     @PostMapping(value = "/users/setUser")
-    public String setUser(@ModelAttribute User newUser) {
-        User currentUser = userService.getById(newUser.getId());
-        if (!newUser.getName().equals("")) {
-            currentUser.setName(newUser.getName());
+    public String setUser(@ModelAttribute User user) {
+        User currentUser = userService.getById(user.getId());
+        if (!user.getName().equals("")) {
+            currentUser.setName(user.getName());
         }
-        if (!newUser.getSurname().equals("")) {
-            currentUser.setSurname(newUser.getSurname());
+        if (!user.getSurname().equals("")) {
+            currentUser.setSurname(user.getSurname());
         }
-        if (newUser.getAge() != null) {
-            currentUser.setAge(newUser.getAge());
+        if (user.getAge() != null) {
+            currentUser.setAge(user.getAge());
         }
         userService.setUser(currentUser);
 

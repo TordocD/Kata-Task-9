@@ -15,15 +15,15 @@
             <th>Age</th>
 
         </tr>
-        <tr th:each="user: ${users}">
-            <td th:text="*{user.id}"> </td>
-            <td th:text="*{user.name}"> </td>
-            <td th:text="*{user.surname}"> </td>
-            <td th:text="*{user.age}"> </td>
+        <tr th:each="oneUser: ${users}">
+            <td th:text="*{oneUser.id}"> </td>
+            <td th:text="*{oneUser.name}"> </td>
+            <td th:text="*{oneUser.surname}"> </td>
+            <td th:text="*{oneUser.age}"> </td>
             <td>
-                <form th:action="@{/users/delete}" th:object="${deletedUser}" method="POST">
+                <form th:action="@{/users/delete}" th:object="${user}" method="POST">
                     <select hidden="hidden" th:field="*{id}">
-                         <option th:value="${user.id}"></option>
+                         <option th:value="${oneUser.id}"></option>
                     </select>
                     <button type="submit">Delete user</button>
                 </form>
@@ -35,7 +35,7 @@
 
     <h2>Add user</h2>
 
-        <form th:action="@{/users/add}" th:object="${newUser}" method="POST">
+        <form th:action="@{/users/add}" th:object="${user}" method="POST">
             Name: <input type="text" required th:field="*{name}"><br />
             Surname <input type="text" required th:field="*{surname}"><br />
             Age <input type="number" required th:field="*{age}"><br />
@@ -45,9 +45,9 @@
 
     <h2>Edit user`s data</h2>
 
-    <form th:action="@{/users/setUser}" th:object="${newUser}" method="POST">
+    <form th:action="@{/users/setUser}" th:object="${user}" method="POST">
         Current user`s id: <select th:field="*{id}">
-            <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.id}"></option>
+            <option th:each="oneUser: ${users}" th:value="${oneUser.id}" th:text="${oneUser.id}"></option>
         </select> <br />
         Name: <input type="text" th:field="*{name}"><br />
         Surname <input type="text" th:field="*{surname}"><br />
