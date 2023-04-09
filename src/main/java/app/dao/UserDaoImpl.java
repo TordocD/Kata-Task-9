@@ -53,6 +53,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void setUser(User newUser) {
-        entityManager.merge(newUser);
+        User currentUser = getById(newUser.getId());
+        if (!newUser.getName().equals("")) {
+            currentUser.setName(newUser.getName());
+        }
+        if (!newUser.getSurname().equals("")) {
+            currentUser.setSurname(newUser.getSurname());
+        }
+        if (newUser.getAge() != null) {
+            currentUser.setAge(newUser.getAge());
+        }
+        entityManager.merge(currentUser);
     }
 }
