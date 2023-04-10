@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import app.service.UserService;
 
 @Controller
+@RequestMapping(value = "/users")
 public class UserController {
 
     private final UserService userService;
@@ -17,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping()
     public String getAllUsers(ModelMap model) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("user", new User());
@@ -25,23 +26,23 @@ public class UserController {
         return "users";
     }
 
-    @PostMapping(value = "/users/add")
+    @PostMapping(value = "/add")
     public String addUser(@ModelAttribute User user) {
         userService.add(user);
-        return "redirect:/users";
 
+        return "redirect:/users";
     }
 
-    @PostMapping(value = "/users/delete")
+    @PostMapping(value = "/delete")
     public String deleteUser(@ModelAttribute User user) {
         userService.deleteById(user.getId());
 
         return "redirect:/users";
     }
 
-    @PostMapping(value = "/users/setUser")
-    public String setUser(@ModelAttribute User user) {
-        userService.setUser(user);
+    @PostMapping(value = "/update")
+    public String updateUser(@ModelAttribute User user) {
+        userService.updateUser(user);
 
         return "redirect:/users";
     }
