@@ -19,16 +19,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createTable() {
-        userDao.createTable();
-    }
-
-    @Override
-    public void dropTable() {
-        userDao.dropTable();
-    }
-
-    @Override
     @Transactional
     public List<User> getAllUsers() {
         return userDao.getAllUsers();

@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface UserService {
 
-    void createTable();
-    void dropTable();
     List<User> getAllUsers();
     void add(User user);
     User getById(int id);

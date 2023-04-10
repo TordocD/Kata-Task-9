@@ -16,20 +16,6 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    public void createTable() {
-        entityManager.createNativeQuery("CREATE TABLE IF NOT EXISTS user(" +
-                "id INT PRIMARY KEY AUTO_INCREMENT, " +
-                "name VARCHAR(25), " +
-                "surname VARCHAR(25), " +
-                "age INT);");
-    }
-
-    @Override
-    public void dropTable() {
-        entityManager.createNativeQuery("DROP TABLE IF EXISTS user");
-    }
-
-    @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
     }
